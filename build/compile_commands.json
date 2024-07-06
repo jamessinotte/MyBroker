@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/james/MyBroker/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++ -DBSONCXX_POLY_USE_IMPLS=ON -DBSONCXX_POLY_USE_MNMLSTC=1. -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/james/MyBroker/build/MyBroker_autogen/include -isystem /home/james/Qt/6.7.1/gcc_64/include/QtCore -isystem /home/james/Qt/6.7.1/gcc_64/include -isystem /home/james/Qt/6.7.1/gcc_64/mkspecs/linux-g++ -isystem /home/james/Qt/6.7.1/gcc_64/include/QtWidgets -isystem /home/james/Qt/6.7.1/gcc_64/include/QtGui -g -fPIC -std=gnu++17 -o CMakeFiles/MyBroker.dir/MyBroker_autogen/mocs_compilation.cpp.o -c /home/james/MyBroker/build/MyBroker_autogen/mocs_compilation.cpp",
+  "file": "/home/james/MyBroker/build/MyBroker_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/home/james/MyBroker/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++ -DBSONCXX_POLY_USE_IMPLS=ON -DBSONCXX_POLY_USE_MNMLSTC=1. -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/james/MyBroker/build/MyBroker_autogen/include -isystem /home/james/Qt/6.7.1/gcc_64/include/QtCore -isystem /home/james/Qt/6.7.1/gcc_64/include -isystem /home/james/Qt/6.7.1/gcc_64/mkspecs/linux-g++ -isystem /home/james/Qt/6.7.1/gcc_64/include/QtWidgets -isystem /home/james/Qt/6.7.1/gcc_64/include/QtGui -g -fPIC -std=gnu++17 -o CMakeFiles/MyBroker.dir/main.cpp.o -c /home/james/MyBroker/main.cpp",
+  "file": "/home/james/MyBroker/main.cpp"
+},
+{
+  "directory": "/home/james/MyBroker/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++ -DBSONCXX_POLY_USE_IMPLS=ON -DBSONCXX_POLY_USE_MNMLSTC=1. -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/james/MyBroker/build/MyBroker_autogen/include -isystem /home/james/Qt/6.7.1/gcc_64/include/QtCore -isystem /home/james/Qt/6.7.1/gcc_64/include -isystem /home/james/Qt/6.7.1/gcc_64/mkspecs/linux-g++ -isystem /home/james/Qt/6.7.1/gcc_64/include/QtWidgets -isystem /home/james/Qt/6.7.1/gcc_64/include/QtGui -g -fPIC -std=gnu++17 -o CMakeFiles/MyBroker.dir/mybroker.cpp.o -c /home/james/MyBroker/mybroker.cpp",
+  "file": "/home/james/MyBroker/mybroker.cpp"
+},
+{
+  "directory": "/home/james/MyBroker/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++ -DBSONCXX_POLY_USE_IMPLS=ON -DBSONCXX_POLY_USE_MNMLSTC=1. -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/james/MyBroker/build/MyBroker_autogen/include -isystem /home/james/Qt/6.7.1/gcc_64/include/QtCore -isystem /home/james/Qt/6.7.1/gcc_64/include -isystem /home/james/Qt/6.7.1/gcc_64/mkspecs/linux-g++ -isystem /home/james/Qt/6.7.1/gcc_64/include/QtWidgets -isystem /home/james/Qt/6.7.1/gcc_64/include/QtGui -g -fPIC -std=gnu++17 -o CMakeFiles/MyBroker.dir/signup.cpp.o -c /home/james/MyBroker/signup.cpp",
+  "file": "/home/james/MyBroker/signup.cpp"
+},
+{
+  "directory": "/home/james/MyBroker/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++ -DBSONCXX_POLY_USE_IMPLS=ON -DBSONCXX_POLY_USE_MNMLSTC=1. -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/james/MyBroker/build/MyBroker_autogen/include -isystem /home/james/Qt/6.7.1/gcc_64/include/QtCore -isystem /home/james/Qt/6.7.1/gcc_64/include -isystem /home/james/Qt/6.7.1/gcc_64/mkspecs/linux-g++ -isystem /home/james/Qt/6.7.1/gcc_64/include/QtWidgets -isystem /home/james/Qt/6.7.1/gcc_64/include/QtGui -g -fPIC -std=gnu++17 -o CMakeFiles/MyBroker.dir/login.cpp.o -c /home/james/MyBroker/login.cpp",
+  "file": "/home/james/MyBroker/login.cpp"
+},
+{
+  "directory": "/home/james/MyBroker/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++ -DBSONCXX_POLY_USE_IMPLS=ON -DBSONCXX_POLY_USE_MNMLSTC=1. -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/james/MyBroker/build/MyBroker_autogen/include -isystem /home/james/Qt/6.7.1/gcc_64/include/QtCore -isystem /home/james/Qt/6.7.1/gcc_64/include -isystem /home/james/Qt/6.7.1/gcc_64/mkspecs/linux-g++ -isystem /home/james/Qt/6.7.1/gcc_64/include/QtWidgets -isystem /home/james/Qt/6.7.1/gcc_64/include/QtGui -g -fPIC -std=gnu++17 -o CMakeFiles/MyBroker.dir/database.cpp.o -c /home/james/MyBroker/database.cpp",
+  "file": "/home/james/MyBroker/database.cpp"
+}
+]

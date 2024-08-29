@@ -1,7 +1,8 @@
 TEMPLATE = app
 CONFIG += c++17
+QT += core sql gui
 QT += widgets
-QT += core sql
+
 
 SOURCES += main.cpp \
            signup.cpp

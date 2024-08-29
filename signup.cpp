@@ -1,115 +1,175 @@
 #include "signup.h"
-#include "ui_signup.h"
-
-#include <string>
 #include <iostream>
-
-
-
 
 Signup::Signup(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::Signup)
-
-
 {
+    QWidget::showFullScreen();
 
-    std::cout <<"signup" << std::endl;
-    ui->setupUi(this);
-    std::cout << "setupUi completed" << std::endl;
-    if (ui->SignupButton) {
-        std::cout << "SignupButton exists" << std::endl;
+    QPushButton *signupButton = new QPushButton("Sign Up", this);
+    signupButton->setObjectName("signupButton");
+    QLineEdit *confirmPassword = new QLineEdit(this);
+    confirmPassword->setPlaceholderText("Confirm Password");
+    QLineEdit *firstName = new QLineEdit(this);
+    firstName->setPlaceholderText("First Name");
+    firstName->setObjectName("firstName");
+    QLineEdit *lastName = new QLineEdit(this);
+    lastName->setPlaceholderText("Last Name");
+    lastName->setObjectName("lastName");
+    QLineEdit *signupEmail = new QLineEdit(this);
+    signupEmail->setPlaceholderText("Email");
+    signupEmail->setObjectName("signupEmail");
+    QLineEdit *signupPassword = new QLineEdit(this);
+    signupPassword->setPlaceholderText("Password");
+    signupPassword->setObjectName("signupPassword");
+    QLineEdit *signupUsername = new QLineEdit(this);
+    signupUsername->setPlaceholderText("Username");
+    signupUsername->setObjectName("signupUsername");
+    QLabel *errorText = new QLabel(this);
+    QPushButton *loginPageButton = new QPushButton("Login", this);
 
+    this->setStyleSheet(
+        "QWidget {"
+        "    background-color: #f7f7f7;"
+        "    font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;"
+        "    font-size: 16px;"
+        "    color: #333333;"
+        "}"
+        "QLineEdit {"
+        "    background-color: #FFFFFF;"
+        "    border: 1px solid #CCCCCC;"
+        "    border-radius: 10px;"
+        "    padding: 10px;"
+        "    color: #333333;"
+        "    font-size: 16px;"
+        "    margin-bottom: 20px;"
+        "    width: 350px;"
+        "}"
+        "QPushButton {"
+        "    background-color: #6a11cb;"
+        "    color: #FFFFFF;"
+        "    border: none;"
+        "    border-radius: 20px;"
+        "    padding: 10px 20px;"
+        "    font-size: 16px;"
+        "    width: 350px;"
+        "}"
+        "QPushButton:hover {"
+        "    background-color: #7f39fb;"
+        "}"
+        "QLabel {"
+        "    color: #333333;"
+        "    font-weight: bold;"
+        "}"
+        "#errorText {"
+        "    color: #FF0000;"
+        "    margin-top: 10px;"
+        "    font-size: 14px;"
+        "    font-weight: bold;"
+        "}"
+        );
 
-    }
-    connect(ui->SignupButton,&QPushButton::clicked,this, [=](){
-        checkInfo();
+    QHBoxLayout *mainLayout = new QHBoxLayout(this);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
+    mainLayout->setSpacing(0);
+
+    QWidget *leftContainer = new QWidget(this);
+    leftContainer->setStyleSheet("background-color: #6a11cb;");
+    QVBoxLayout *leftLayout = new QVBoxLayout(leftContainer);
+
+    QLabel *welcomeLabel = new QLabel("Welcome To MyBroker", leftContainer);
+    welcomeLabel->setStyleSheet(
+        "font-size: 36px;"
+        "font-weight: bold;"
+        "color: #FFFFFF;"
+        );
+    welcomeLabel->setAlignment(Qt::AlignCenter);
+
+    QLabel *profitsLabel = new QLabel("See Your Profits Today!", leftContainer);
+    profitsLabel->setStyleSheet(
+        "font-size: 24px;"
+        "color: #FFFFFF;"
+        "background: transparent;"
+        );
+    profitsLabel->setAlignment(Qt::AlignCenter);
+
+    leftLayout->addStretch();
+    leftLayout->addWidget(welcomeLabel);
+    leftLayout->addWidget(profitsLabel);
+    leftLayout->addStretch();
+    leftLayout->setAlignment(Qt::AlignCenter);
+
+    mainLayout->addWidget(leftContainer, 1);
+
+    QGraphicsDropShadowEffect *welcomeShadow = new QGraphicsDropShadowEffect();
+    welcomeShadow->setBlurRadius(15.0);
+    welcomeShadow->setOffset(2.0, 2.0);
+    welcomeShadow->setColor(QColor(0, 0, 0, 80));
+    welcomeLabel->setGraphicsEffect(welcomeShadow);
+    profitsLabel->setGraphicsEffect(welcomeShadow);
+
+    QWidget *formContainer = new QWidget(this);
+    QVBoxLayout *formLayout = new QVBoxLayout(formContainer);
+    QLabel *formTitle = new QLabel("Sign Up Now", formContainer);
+    formTitle->setStyleSheet("font-size: 24px; color: #6a11cb; margin-bottom: 20px;");
+    formLayout->addWidget(formTitle, 0, Qt::AlignLeft);
+    formLayout->addWidget(signupEmail);
+    formLayout->addWidget(signupUsername);
+    formLayout->addWidget(signupPassword);
+    formLayout->addWidget(confirmPassword);
+    formLayout->addWidget(firstName);
+    formLayout->addWidget(lastName);
+    formLayout->addWidget(signupButton);
+    formLayout->addWidget(loginPageButton);
+    formLayout->setAlignment(Qt::AlignCenter);
+    formLayout->setSpacing(20);
+
+    mainLayout->addWidget(formContainer, 0, Qt::AlignRight | Qt::AlignVCenter);
+
+    this->setLayout(mainLayout);
+
+    connect(signupButton, &QPushButton::clicked, this, [=]() {
+        checkInfo(signupUsername, signupEmail, signupPassword, confirmPassword, firstName, lastName, errorText);
+        emit switchToLogin();
     });
 
-
-
-
-
+    connect(loginPageButton, &QPushButton::clicked, this, &Signup::switchToLogin);
 }
 
 Signup::~Signup()
 {
-    delete ui;
 }
 
-std::string Signup::getText(const QString type) const {
-    QLineEdit *lineEdit = findChild<QLineEdit*>(type);
-    std::string text = lineEdit->text().toStdString();
+void Signup::checkInfo(QLineEdit* signupUsername, QLineEdit* signupEmail, QLineEdit* signupPassword, QLineEdit* confirmPassword, QLineEdit* firstName, QLineEdit* lastName, QLabel* errorText) {
+    database& db = database::getInstance();
 
-    return text;
+    QString username = signupUsername->text();
+    QString email = signupEmail->text();
+    QString password = signupPassword->text();
+    QString confirmPass = confirmPassword->text();
+    QString fname = firstName->text();
+    QString lname = lastName->text();
 
+    if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPass.isEmpty() || fname.isEmpty() || lname.isEmpty()) {
+        errorText->setText("Please fill in all of the fields.");
+        return;
+    }
 
+    if (password != confirmPass) {
+        errorText->setText("Passwords do not match.");
+        return;
+    }
+
+    if (!db.checkSignup(username, email)) {
+        errorText->setText(db.error);
+        return;
+    }
+
+    db.insertSignup(fname, lname, email, password, username);
+    emit switchToLogin();
 }
-void Signup::checkInfo() {
-    std::cout << "Signupbutton" << std::endl;
-
-    std::string password = getText("signupPassword");
-    std::string confirmPassword = getText("confirmPassword");
-    std::string email_ = getText("signupEmail");
-    std::string username_ = getText("signupUsername");
-    std::string firstName = getText("firstName");
-    std::string lastName = getText("lastName");
 
 
-    std::cout << "data" <<  password <<  confirmPassword <<  email_ <<  username_ <<  firstName <<  lastName << std::endl;
-    std::cout << "Retrieved UI text fields" << std::endl << std::flush;
-    std::array<std::string,6> info = {password, confirmPassword, email_, username_, firstName, lastName};
-    bool error = false;
-    for (int i = 0; i < 6; ++i) {
-        if (info[i] == "" and error==false) {
-            std::cout << "notext" << std::endl;
-            error = true;
-            errorHandle(info[i]);
-        }
-    }
-
-
-    if (password != confirmPassword && error==false) {
-        errorHandle("mismatchPassword");
-        error = true;
-    }
-
-
-
-
-    if (error == false) {
-
-        std::cout << "doc inserted" << std::endl;
-    }
-    emit switchUI("Login");
-
-
-
-}
-void Signup::errorHandle(std::string error) {
-    std::cout << "error" << std::endl;
-    if (error == "signupPassword" or error == "signupUsername" or error == "confirmPassword" or error == "signupPassowrd" or error == "firstName" or error == "lastName") {
-        std::cout << "blank" << std::endl;
-        ui->errorText->setText("please fill in all of the texts");
-
-    }
-    else if (error == "usernameExists"){
-         std::cout << "username exists" << std::endl;
-        ui->errorText->setText("Username already exists");
-    }
-    else if (error == "emailExists"){
-        std::cout << "email exists" << std::endl;
-        ui->errorText->setText("Email is already used");
-    }
-    else if (error == "mismatchPassword") {
-        std::cout << "password mismatch" << std::endl;
-        ui->errorText->setText("Passwords do not match");
-    }
-
-
-
-
-}
 
 
 

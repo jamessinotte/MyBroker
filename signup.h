@@ -1,31 +1,45 @@
 #ifndef SIGNUP_H
 #define SIGNUP_H
 
-#include "qmainwindow.h"
 #include <QWidget>
 #include "ui_signup.h"
 #include "ui_login.h"
+#include "database.h"
+#include "functions.h"
+#include <QVBoxLayout>
+#include <QGraphicsDropShadowEffect>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QGraphicsDropShadowEffect>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QWidget>
+#include <QPixmap>
+#include <QPushButton>
+
+
 
 
 namespace Ui {
-class Signup;
-class Login;
+class MyBroker;
 }
 
-class Signup : public QWidget
+class Signup : public QWidget, public functions
 {
     Q_OBJECT
 
 public:
     explicit Signup(QWidget *parent = nullptr);
-    std::string getText(QString type) const;
 
-    void checkInfo();
+
+    void checkInfo(QLineEdit* signupUsername, QLineEdit* signupEmail, QLineEdit* signupPassword, QLineEdit* confirmPassword, QLineEdit* firstName, QLineEdit* lastName, QLabel* errorText);
     void errorHandle(std::string error);
     void sendInfo();
 
-
     ~Signup();
+signals:
+    void switchToLogin();
 
 private:
     Ui::Signup *ui;
@@ -36,8 +50,13 @@ private:
     QString email;
     QString username;
     QString password;
-signals:
-    void switchUI(const QString &newUI);
+
+
+
+
+
+
+
 
 
 };
